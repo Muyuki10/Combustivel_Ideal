@@ -2,13 +2,19 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-web';
+import Botao from './src/components/Botao';
+import ResultCard from './src/components/ResultCard';
+
 
 export default function App() {
+
   const [ gasolina, setGasolina] = useState('');
   const [ etanol, setEtanol] = useState('');
+
+
   return (
     <View style={styles.container}>
-      <Text>ALCOOL OU GASOLINA</Text>
+      <Text style={styles.textTop}>ALCOOL OU GASOLINA</Text>
 
       <Image
         source={require('./assets/posto.jpg')}
@@ -23,10 +29,10 @@ export default function App() {
 
       style = {styles.Input}
 
-      value= {etanol}
-
-      onChange={setEtanol}
       
+
+      onChangeText={setEtanol}
+      value= {etanol}
       />
 
 
@@ -35,23 +41,30 @@ export default function App() {
       </View>
 
       <View>
-      <Text>PREÇO GASOLINA R$</Text>
-      <TextInput
+          <Text>PREÇO GASOLINA R$</Text>
+          <TextInput
 
-      placeholder='digite aqui'
+                placeholder='digite aqui'
 
-      style = {styles.Input}
+                style = {styles.Input}
 
-      value= {gasolina}
+                value= {gasolina}
 
-      onChange={setGasolina}
-      
-      />
+                onChangeText={setGasolina}
+              
+          />
       </View>
 
-      <TouchableOpacity>
-        <Text>RESULTADO</Text>
-      </TouchableOpacity>
+      <Botao></Botao>
+
+
+      <ResultCard
+
+        gasolina1={parseFloat(gasolina)}
+        etanol1={parseFloat(etanol)}
+      
+      />
+
 
 
       <StatusBar style="auto" />
@@ -62,13 +75,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffffe2',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
   },
   imagem : {
     height: 100,
     width: 100,
+    
   },
   Input : {
     borderWidth: 3,
@@ -76,6 +90,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 2
    
+  },
+  textTop :{
+    height: 60,
+    
+
   }
 });
 
