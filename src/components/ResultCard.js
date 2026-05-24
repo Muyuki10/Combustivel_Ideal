@@ -25,6 +25,7 @@ export default function ResultCard({gasolina1 , etanol1}) {
         <View style={styles.container}>
         <Text style={styles.texto}>ABASTEÇA COM :</Text>
         <Text style={styles.escolha}>{combustivel(gasolina1, etanol1)}</Text>
+        <Text style={styles.texto}>o etanol esta a {((etanol1/gasolina1) * 100).toFixed(1)}% do preço da gasolina</Text>
         </View>
     )
     
@@ -32,8 +33,8 @@ export default function ResultCard({gasolina1 , etanol1}) {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 20,
-        padding: 15,
+        marginTop: 10,
+        padding: 5,
         backgroundColor: '#fbff00',
         borderRadius: 8,
         borderWidth: 2,

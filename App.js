@@ -101,24 +101,25 @@ const styles = StyleSheet.create({
   imagem : {
     height: 100,
     width: 100,
-    marginBottom: 20,
+    marginBottom: 10,
     
   },
   Input : {
     borderWidth: 2,
     borderColor:'#ff2323',
     borderRadius: 10,
-    padding: 10,
+    padding: 5,
     fontSize: 16,
     width: '100%',
     backgroundColor: '#ffffff',
    
   },
   textTop :{
-    height: 60,
+    height: 30,
     fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 20,
+    letterSpacing: 1,
 
   },
   label :{
