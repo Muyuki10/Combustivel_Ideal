@@ -1,28 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { TextInput } from 'react-native-web';
+import { TextInput } from 'react-native';
 import Botao from './src/components/Botao';
 import ResultCard from './src/components/ResultCard';
+import LinhaDivisora from './src/components/LinhaDivisora';
 
 
 export default function App() {
 
   const [ gasolina, setGasolina] = useState('');
   const [ etanol, setEtanol] = useState('');
+  const [mostrarResultado, setMostraResultado] = useState(false);
+
+  const calcular = () => {
+    setMostraResultado(true);
+  };
 
 
   return (
     <View style={styles.container}>
+      
       <Text style={styles.textTop}>ALCOOL OU GASOLINA</Text>
+
+      <LinhaDivisora/>
 
       <Image
         source={require('./assets/posto.jpg')}
         style = {styles.imagem}
       />
 
-      <View> 
-      <Text>PREÇO ETANOL R$</Text>
+      <View style={styles.blocoInput}> 
+      <Text style={styles.label}>PREÇO ETANOL R$</Text>
       <TextInput
 
       placeholder='digite aqui'
@@ -31,7 +40,12 @@ export default function App() {
 
       
 
-      onChangeText={setEtanol}
+      onChangeText={(texto) => {
+        setEtanol(texto)
+        setMostraResultado(false)
+
+
+      }}
       value= {etanol}
       />
 
@@ -40,8 +54,8 @@ export default function App() {
 
       </View>
 
-      <View>
-          <Text>PREÇO GASOLINA R$</Text>
+      <View style={styles.blocoInput}>
+          <Text style={styles.label}>PREÇO GASOLINA R$</Text>
           <TextInput
 
                 placeholder='digite aqui'
@@ -50,20 +64,25 @@ export default function App() {
 
                 value= {gasolina}
 
-                onChangeText={setGasolina}
+                onChangeText={(texto) => {
+
+                  setGasolina(texto)
+                  setMostraResultado(false)
+                }}
               
           />
       </View>
 
-      <Botao></Botao>
+      <Botao aoClicar={calcular}></Botao>
 
 
-      <ResultCard
-
-        gasolina1={parseFloat(gasolina)}
-        etanol1={parseFloat(etanol)}
-      
+     {mostrarResultado && 
+     (<ResultCard 
+      gasolina1={gasolina} 
+      etanol1={etanol}
       />
+
+     )}
 
 
 
@@ -75,27 +94,44 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffffe2',
+    backgroundColor: '#fff200e2',
     alignItems: 'center',
     justifyContent: 'center',
   },
   imagem : {
     height: 100,
     width: 100,
+    marginBottom: 20,
     
   },
   Input : {
-    borderWidth: 3,
-    borderColor: 'black',
+    borderWidth: 2,
+    borderColor:'#ff2323',
     borderRadius: 10,
-    padding: 2
+    padding: 10,
+    fontSize: 16,
+    width: '100%',
+    backgroundColor: '#ffffff',
    
   },
   textTop :{
     height: 60,
-    
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 20,
 
-  }
+  },
+  label :{
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  blocoInput : {
+    width: '80%',
+    marginVertical: 8,
+  },
+  
+
+
 });
 
 
